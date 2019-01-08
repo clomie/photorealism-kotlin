@@ -3,11 +3,8 @@ package net.clomie.photorealism.chapter2
 import java.io.File
 
 class Image(val width: Int, val height: Int) {
-    private var data: Array<Vec3> = Array(width * height) {
-        Vec3(
-            0
-        )
-    }
+
+    private var data: Array<Vec3> = Array(width * height) { Vec3(0) }
 
     operator fun get(x: Int, y: Int) = data[x + width * y]
     operator fun set(x: Int, y: Int, c: Vec3) {

@@ -1,5 +1,6 @@
 package net.clomie.photorealism.chapter2
 
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 class Vec3(val x: Double, val y: Double, val z: Double) {
@@ -49,3 +50,11 @@ fun cross(a: Vec3, b: Vec3) =
     )
 
 fun normalize(v: Vec3) = v / v.length()
+
+fun orthonormalBasis(forward: Vec3): Pair<Vec3, Vec3> {
+    val any = if (abs(forward.x) > 0.9) Vec3(0, 1, 0) else Vec3(1, 0, 0)
+
+    val right = normalize(any - dot(forward, any) * forward)
+    val up = cross(forward, any)
+    return Pair(right, up)
+}

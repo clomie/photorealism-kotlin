@@ -1,0 +1,12 @@
+# Java / Kotlin
+*.class
+*.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+out/

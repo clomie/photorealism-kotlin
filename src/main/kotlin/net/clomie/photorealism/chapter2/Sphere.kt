@@ -4,7 +4,7 @@ import kotlin.math.sqrt
 
 class Sphere(val center: Vec3, val radius: Double) {
 
-    fun intersect(ray: Ray, result: Hit): Boolean {
+    fun intersect(ray: Ray): Hit? {
         val b = dot(ray.direction, ray.origin - center)
         val c = (ray.origin - center).length2() - radius * radius
         val d = b * b - c
@@ -18,13 +18,10 @@ class Sphere(val center: Vec3, val radius: Double) {
             else -> null
         }
 
-        val t = select(t1, t2) ?: return false
+        val t = select(t1, t2) ?: return null
         val hitPos = ray(t)
+        val hitNormal = normalize(hitPos - center)
 
-        result.t = t
-        result.hitPos = hitPos
-        result.hitNormal = normalize(hitPos - center)
-        result.hitSphere = this
-        return true
+        return Hit(t, hitPos, hitNormal, this)
     }
 }
